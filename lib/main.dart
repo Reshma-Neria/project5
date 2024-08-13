@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'product_page.dart'; // Import the ProductPage
+import 'product_page.dart';
+import 'third_page.dart'; // Import the third page
 
 void main() {
   runApp(MyApp());
@@ -10,10 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Webpage with Search and Images',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(),
       home: HomePage(),
     );
   }
@@ -58,11 +57,6 @@ class HomePage extends StatelessWidget {
                 // Handle menu action
               },
             ),
-            Text(
-              'Webpage',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 22, 22, 22), fontSize: 20.0),
-            ),
             IconButton(
               icon: Icon(Icons.person,
                   color: Color.fromARGB(255, 17, 17, 17), size: 30.0),
@@ -101,9 +95,7 @@ class HomePage extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.shopping_cart,
                       color: Color.fromARGB(255, 19, 18, 18), size: 30.0),
-                  onPressed: () {
-                    // Handle shopping cart action
-                  },
+                  onPressed: () {},
                 ),
               ],
             ),
@@ -123,7 +115,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
-            height: 200, // Height of the scrollable images
+            height: 350,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: images.length,
@@ -193,7 +185,7 @@ class HomePage extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Best Selling',
+                'Select Items',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -201,64 +193,63 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.all(16.0),
-            padding: EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 193, 194, 196),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 150, // Set desired image width
-                  height: 150, // Set desired image height
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/img (5).png'),
-                      fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              // Navigate to ThirdPage when the image is tapped
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ThirdPage()),
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 193, 194, 196),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 150, // Set desired image width
+                    height: 150, // Set desired image height
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/img (5).png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(width: 10.0),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Description Title',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 20, 20, 20),
+                  SizedBox(width: 10.0),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Description Title',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 20, 20, 20),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 8.0),
-                      Text(
-                        'Description about the image. This provides some context or information about the image shown on the left.',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: const Color.fromARGB(255, 20, 20, 20),
+                        SizedBox(height: 8.0),
+                        Text(
+                          'Description about the image. This provides some context or information about the image shown on the left.',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: const Color.fromARGB(255, 20, 20, 20),
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.arrow_forward,
-                      size: 30.0, color: Color.fromARGB(255, 14, 13, 13)),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProductPage()),
-                    );
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
